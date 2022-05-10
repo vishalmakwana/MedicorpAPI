@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Medicorp.Core.Entity.Master
 {
@@ -36,8 +33,14 @@ namespace Medicorp.Core.Entity.Master
 
     public class ProductMasterFilter
     {
-        public int? ProductId { get; set; }
+        public int ProductId { get; set; }
         public string ProductName { get; set; }
+
+        public string ShortDescription { get; set; }
+
+        public string LongDescription { get; set; }
+
+        public string OrganizationName { get; set; }
 
         public string MRP { get; set; }
         public bool IsActive { get; set; }

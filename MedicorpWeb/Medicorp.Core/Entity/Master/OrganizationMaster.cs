@@ -25,7 +25,7 @@ namespace Medicorp.Core.Entity
 
     public class OrganizationMasterFilter
     {
-        public int? OrganizationId { get; set; }
+        public int OrganizationId { get; set; }
         public string OrganizationName { get; set; }
         public string OrganizationPrefix { get; set; }
         public bool IsActive { get; set; }

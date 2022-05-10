@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
+
 
 namespace Medicorp.Core.Entity.Master
 {
@@ -33,7 +29,7 @@ namespace Medicorp.Core.Entity.Master
 
     public class ImageMasterFilter
     {
-        public int? ImageId { get; set; }
+        public int ImageId { get; set; }
 
         public string URL { get; set; }
 

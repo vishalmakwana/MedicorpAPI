@@ -1,10 +1,5 @@
 ﻿using Medicorp.Core;
 using Medicorp.Core.Entity;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Medicorp.IServices
 {
@@ -15,7 +10,6 @@ namespace Medicorp.IServices
         Task<ApiResponse<int>> UpdateAsync(OrganizationMaster organizationMaster);
         Task<ApiResponse<int>> CreateAsync(OrganizationMaster organizationMaster);
         Task<ApiResponse<int>> DeleteAsync(int OrganizationId);
-        Task<bool> ValidateAsync(int OrganizationId, string OrganizationName);
-        Task<bool> ValidateNameAsync(string OrganizationName);
+       
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Medicorp.Core.Entity.Master
 {
     public class UserPresentationMaster
@@ -33,7 +28,7 @@ namespace Medicorp.Core.Entity.Master
 
     public class UserPresentationMasterFilter
     {
-        public int? UserPresentationMasterId { get; set; }
+        public int UserPresentationMasterId { get; set; }
 
         public int OrganizationId { get; set; }
 

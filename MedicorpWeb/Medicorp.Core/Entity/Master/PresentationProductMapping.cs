@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Medicorp.Core.Entity.Master
 {
     public class PresentationProductMapping
@@ -27,7 +22,7 @@ namespace Medicorp.Core.Entity.Master
 
     public class PresentationProductMappingFilter
     {
-        public int? PresentationProductMappingId { get; set; }
+        public int PresentationProductMappingId { get; set; }
 
         public int OrganizationId { get; set; }
 

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace Medicorp.Core.Entity.Master
 {
     public class DoctorSpecilityMapping
@@ -27,7 +22,7 @@ namespace Medicorp.Core.Entity.Master
 
     public class DoctorSpecilityMappingFilter
     {
-        public int? DoctorSpecilityMappingId { get; set; }
+        public int DoctorSpecilityMappingId { get; set; }
 
         public int DoctorId { get; set; }
 

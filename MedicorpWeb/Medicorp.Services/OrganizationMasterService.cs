@@ -42,7 +42,7 @@ namespace Medicorp.Services
                     dbPara.Add("@IsActive", organizationMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@InsertBy", organizationMaster.InsertBy, DbType.String);
                     dbPara.Add("@InsertDate", organizationMaster.InsertedDate, DbType.DateTime);
-                    response.ResponseContent = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.OrganizationMasterInsert,
+                    response.Result = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.OrganizationMasterInsert,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
 
@@ -50,7 +50,7 @@ namespace Medicorp.Services
                 }
                 catch (Exception ex)
                 {
-                    response.Fail(ex);
+                    response.ConstructErrorResponse(" OrganizationMasterService CreateAsync", ex.Message);
                 }
             }
             return response;
@@ -65,7 +65,7 @@ namespace Medicorp.Services
                 {
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@OrganizationId", OrganizationId, DbType.Int32);
-                    response.ResponseContent = await _dapperHelper.ExecuteAsync(sp: SqlObjectName.OrganizationMasterDelete,
+                    response.Result = await _dapperHelper.ExecuteAsync(sp: SqlObjectName.OrganizationMasterDelete,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
 
@@ -73,7 +73,7 @@ namespace Medicorp.Services
                 }
                 catch (Exception ex)
                 {
-                    response.Fail(ex);
+                    response.ConstructErrorResponse("OrganizationMasterService DeleteAsync", ex.Message);
                 }
 
                 return response;
@@ -93,13 +93,13 @@ namespace Medicorp.Services
                 dbPara.Add("@OrganizationId", filter.OrganizationId, DbType.Int32);
                 dbPara.Add("@OrganizationName", filter.OrganizationName, DbType.String);
                 dbPara.Add("@IsActive", filter.IsActive, DbType.Boolean);
-                response.ResponseContent = await _dapperHelper.GetAllAsync<T>(sp: SqlObjectName.OrganizationMasterSelect,
+                response.Result = await _dapperHelper.GetAllAsync<T>(sp: SqlObjectName.OrganizationMasterSelect,
                                               parms: dbPara,
                                               commandType: CommandType.StoredProcedure);
             }
             catch (Exception ex)
             {
-                response.Fail(ex);
+                response.ConstructErrorResponse("OrganizationMasterService GetOrganizationAsync", ex.Message);
             }
             return response;
         }
@@ -126,7 +126,7 @@ namespace Medicorp.Services
                     dbPara.Add("@IsActive", organizationMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@UpdateBy", organizationMaster.UpdateBy, DbType.String);
                     dbPara.Add("@UpdatedDate", organizationMaster.UpdateDate, DbType.DateTime);
-                    response.ResponseContent = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.OrganizationMasterUpdate,
+                    response.Result = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.OrganizationMasterUpdate,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
 
@@ -134,8 +134,9 @@ namespace Medicorp.Services
                 }
                 catch (Exception ex)
                 {
-                    response.Fail(ex);
+                    response.ConstructErrorResponse("OrganizationMasterService UpdateAsync", ex.Message);
                 }
+            
             }
             return response;
         }

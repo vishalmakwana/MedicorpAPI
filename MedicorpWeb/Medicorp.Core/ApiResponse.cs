@@ -1,63 +1,42 @@
-﻿using System.Diagnostics;
+﻿using Newtonsoft.Json;
+using System.Diagnostics;
 using System.Net;
 
 namespace Medicorp.Core
 {
-    public class ApiResponse<T>
+    public class ApiResponse<T> 
     {
         public bool Success { get; set; }
-        public string Message { get; set; }
-        public string StackTrace { get; set; }
-        public string Version { get; set; }
-        public DateTime RequestDateTime { get; set; }
-        public double TotalResponseTimeMS
+        public T Result { get; set; }
+        public bool IsError { get; set; }
+        public HttpStatusCode StatusCode { get; set; }
+
+        [JsonProperty("error")]
+        public string Error { get; set; }
+
+        [JsonProperty("message")]
+        public string ErrorMessage { get; set; }
+
+        [JsonIgnore]
+        public string ErrorTitle { get; set; }
+
+        public Validation validation { get; set; }
+
+        public void ConstructErrorResponse(string title, string message)
         {
-            get
-            {
-                ResponseStopWatch.Stop();
-                TimeSpan ts = ResponseStopWatch.Elapsed;
-                return ts.TotalMilliseconds;
-            }
+            ErrorTitle = title;
+            ErrorMessage = message;
+            IsError = true;
         }
-        public T ResponseContent { get; set; }
-
-        private readonly Stopwatch ResponseStopWatch = new Stopwatch();
-
-        public ApiResponse()
-        {
-            ResponseStopWatch.Start();
-            Version = "2.0";
-            RequestDateTime = DateTime.Now;
-        }
-
-        public void Fail()
-        {
-            Success = false;
-            Message = "Failure!";
-            StackTrace = "";
-        }
-
-        public void Fail(Exception exception)
-        {
-            Success = false;
-            Message = $"{HttpStatusCode.BadRequest} - {exception.GetBaseException().Message}";
-            StackTrace = "";
-        }
-
-        public void Fail(string message)
-        {
-            Success = false;
-            Message = message;
-            StackTrace = "";
-        }
-
-        public void Fail(string message, string stackTrace)
-        {
-            Success = false;
-            Message = message;
-            StackTrace = stackTrace;
-        }
-
-       
     }
+
+    public class Validation
+    {
+        public string source { get; set; }
+        public string[] keys { get; set; }
+    }
+
 }
+
+
+   

@@ -1,9 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace Medicorp.Core.Entity.Master
 {
@@ -32,7 +29,7 @@ namespace Medicorp.Core.Entity.Master
 
     public class SpecilityMasterFilter
     {
-        public int? SpecilityId { get; set; }
+        public int SpecilityId { get; set; }
         
         public string Title { get; set; }
 
