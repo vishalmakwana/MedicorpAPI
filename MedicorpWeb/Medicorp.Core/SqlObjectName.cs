@@ -1,0 +1,21 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Medicorp.Core
+{
+    public static class SqlObjectName
+    {
+        #region Organization Master Object Name
+
+        public const string OrganizationMasterSelect = "Proc_OrganizationMaster_Select";
+        public const string OrganizationMasterInsert = "Proc_OrganizationMaster_Insert";
+        public const string OrganizationMasterUpdate = "Proc_OrganizationMaster_Update";
+        public const string OrganizationMasterDelete = "Proc_OrganizationMaster_Delete";
+        public const string OrganizationMasterExistOrganizationName = "Proc_OrganizationMaster_Exit_OrganizationName";
+        public const string OrganizationMasterValidateOrganizationName = "Proc_ OrganizationMaster_Validate_SkillName";
+        #endregion
+    }
+}
