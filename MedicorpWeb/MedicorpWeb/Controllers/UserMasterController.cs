@@ -27,7 +27,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpPut]
-    [Route("UpdateProductMaster")]
+    [Route("UpdateUserMaster")]
     public async Task<IActionResult> Update([FromBody] UserMasterModel model)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));
@@ -50,7 +50,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpPost]
-    [Route("CreateProductMaster")]
+    [Route("CreateUserMaster")]
     public async Task<IActionResult> Create([FromBody] UserMasterModel model)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));
@@ -73,7 +73,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpDelete]
-    [Route("DeleteProductMaster")]
+    [Route("DeleteUserMaster")]
     public async Task<IActionResult> Delete([FromQuery] int id)
     {
         ApiResponse<int> response = await _userMasterService.DeleteAsync(id);
