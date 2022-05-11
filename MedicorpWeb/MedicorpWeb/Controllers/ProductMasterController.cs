@@ -16,7 +16,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("ReadProductMaster")]
+        [Route("GetProduct")]
         public async Task<IActionResult> Read(int id)
         {
             ProductMasterFilter filter = new ProductMasterFilter() { ProductId = id };
@@ -27,7 +27,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateProductMaster")]
+        [Route("UpdateProduct")]
         public async Task<IActionResult> Update([FromBody] ProductMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
@@ -49,7 +49,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpPost]
-        [Route("CreateProductMaster")]
+        [Route("InsertProduct")]
         public async Task<IActionResult> Create([FromBody] ProductMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
@@ -71,7 +71,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteProductMaster")]
+        [Route("DeleteProduct")]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
             ApiResponse<int> response = await _productMasterService.DeleteAsync(id);

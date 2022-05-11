@@ -45,5 +45,16 @@ namespace Medicorp.Core
         #region User Roles Object Name
         public const string UserRolesMasterSelect = "Proc_AspNetUsersRoles_Select";
         #endregion
+
+        #region Category Master Object Name
+
+        public const string CategoryMasterSelect = "Proc_CategoryMaster_Select";
+        public const string CategoryMasterInsert = "Proc_CategoryMaster_Insert";
+        public const string CategoryMasterUpdate = "Proc_CategoryMaster_Update";
+        public const string CategoryMasterDelete = "Proc_CategoryMaster_Delete";
+        public const string CategoryMasterExistCategoryName = "Proc_CategoryMaster_Exit_CategoryName";
+        public const string CategoryMasterValidateCategoryName = "Proc_CategoryMaster_Validate_CategoryName";
+        #endregion
+
     }
 }

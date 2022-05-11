@@ -16,7 +16,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpGet]
-    [Route("ReadUserMaster")]
+    [Route("GetUser")]
     public async Task<IActionResult> Read(int id)
     {
             UserMasterFilter filter = new UserMasterFilter() { UserId = id };
@@ -27,7 +27,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpPut]
-    [Route("UpdateUserMaster")]
+    [Route("UpdateUser")]
     public async Task<IActionResult> Update([FromBody] UserMasterModel model)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));
@@ -50,7 +50,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpPost]
-    [Route("CreateUserMaster")]
+    [Route("InsertUser")]
     public async Task<IActionResult> Create([FromBody] UserMasterModel model)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));
@@ -73,7 +73,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpDelete]
-    [Route("DeleteUserMaster")]
+    [Route("DeleteUser")]
     public async Task<IActionResult> Delete([FromQuery] int id)
     {
         ApiResponse<int> response = await _userMasterService.DeleteAsync(id);

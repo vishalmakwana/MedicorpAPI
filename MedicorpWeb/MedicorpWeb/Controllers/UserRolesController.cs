@@ -16,7 +16,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("ReadUserRoles")]
+        [Route("GetUserRoles")]
         public async Task<IActionResult> Read(string UserId,string RoleID)
         {
             UserRolesFilter filter = new UserRolesFilter() { UserId = UserId , RoleId=RoleID };

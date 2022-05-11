@@ -18,7 +18,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("ReadOrganizationMaster")]
+        [Route("GetOrganization")]
         public async Task<IActionResult> Read(int id)
         {
             OrganizationMasterFilter filter = new OrganizationMasterFilter() { OrganizationId = id };
@@ -29,7 +29,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpPut]
-        [Route("UpdateOrganizationMaster")]
+        [Route("UpdateOrganization")]
         public async Task<IActionResult> Update([FromBody] OrganizationMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
@@ -48,7 +48,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpPost]
-        [Route("CreateOrganizationMaster")]
+        [Route("InsertOrganization")]
         public async Task<IActionResult> Create([FromBody] OrganizationMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
@@ -66,7 +66,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpDelete]
-        [Route("DeleteOrganizationMaster")]
+        [Route("DeleteOrganization")]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
             ApiResponse<int> response = await _organizationMasterService.DeleteAsync(id);
