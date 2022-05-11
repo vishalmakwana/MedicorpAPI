@@ -45,5 +45,28 @@ namespace Medicorp.Core
         #region User Roles Object Name
         public const string UserRolesMasterSelect = "Proc_AspNetUsersRoles_Select";
         #endregion
+
+        #region Doctor Object Name
+
+        public const string DoctorSelect = "Proc_Doctor_Select";
+        public const string DoctorInsert = "Proc_Doctor_Insert";
+        public const string DoctorUpdate = "Proc_Doctor_Update";
+        public const string DoctorDelete = "Proc_Doctor_Delete";
+        public const string DoctorValidate = "Proc_Doctor_Validate";
+        #endregion
+
+        #region City Master Object Name
+
+        public const string CityMasterSelect = "Proc_CityMaster_Select";
+        public const string CityMasterInsert = "Proc_CityMaster_Insert";
+        public const string CityMasterValidate = "Proc_CityMaster_Validate_CityName";
+        #endregion
+
+        #region State Master Object Name
+
+        public const string StateMasterSelect = "Proc_StateMaster_Select";
+        public const string StateMasterInsert = "Proc_StateMaster_Insert";
+        public const string StateMasterValidate = "Proc_StateMaster_Validate_StateName";
+        #endregion
     }
 }

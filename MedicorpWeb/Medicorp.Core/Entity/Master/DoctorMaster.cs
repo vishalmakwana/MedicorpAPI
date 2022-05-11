@@ -17,9 +17,9 @@ namespace Medicorp.Core.Entity.Master
 
         public string Email { get; set; }
 
-        public string State { get; set; }
+        public int StateId { get; set; }
 
-        public string City { get; set; }
+        public int CityId { get; set; }
 
         public string Address { get; set; }
 
@@ -45,6 +45,17 @@ namespace Medicorp.Core.Entity.Master
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+        public string Email { get; set; }
+
+        public int StateId { get; set; }
+
+        public int CityId { get; set; }
+
+        public string Address { get; set; }
+
+        public string Mobilenumber { get; set; }
+
+        public string Gender { get; set; }
         public bool IsActive { get; set; }
         public int OrganizationId { get; set; }
     }
