@@ -37,8 +37,11 @@ namespace MedicorpWeb
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
 
             services.AddScoped<IDapperHelper, DapperHelper>();
-           services.AddScoped<IOrganizationMaster, OrganizationMasterService>();
-           
+            services.AddScoped<IOrganizationMaster, OrganizationMasterService>();
+            services.AddScoped<IDoctorMasterServices, DoctorMasterServices>();
+            services.AddScoped<IStateMasterService, StateMasterService>();
+            services.AddScoped<ICityMasterService, CityMasterService>();
+
 
            //Configuration of identity.
             _ = services.AddIdentity<ApplicationUser, IdentityRole>(
