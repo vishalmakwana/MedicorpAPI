@@ -4,12 +4,7 @@ using Medicorp.Core.CustomException;
 using Medicorp.Core.Entity.Master;
 using Medicorp.Data.InterFace;
 using Medicorp.IServices;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Medicorp.Services
@@ -87,7 +82,9 @@ namespace Medicorp.Services
             return await GetProductAsync<ProductMaster>(filter);
         }
 
-        async Task<ApiResponse<List<T>>> GetProductAsync<T>(ProductMasterFilter filter)
+        
+
+        public async Task<ApiResponse<List<T>>> GetProductAsync<T>(ProductMasterFilter filter) where T : class
         {
             ApiResponse<List<T>> response = new ApiResponse<List<T>>() { Success = true };
             try

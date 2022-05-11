@@ -10,7 +10,7 @@ namespace MedicorpWeb.Controllers
     [Authorize]
     public class OrganizationMasterController : ApiControllerBase
     {
-        private readonly IOrganizationMaster _organizationMasterService;
+       private readonly IOrganizationMaster _organizationMasterService;
 
         public OrganizationMasterController(IOrganizationMaster organizationMasterService)
         {

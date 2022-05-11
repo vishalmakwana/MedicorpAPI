@@ -95,7 +95,7 @@ namespace MedicorpWeb.Controllers
                     expires: expires,
                     signingCredentials: creds
                 );
-                response.ResponseContent = new AuthResponseModel()
+                response.Result = new AuthResponseModel()
                 {
                     Email = user.Email,
                     FirstName = user.FirstName,
@@ -109,7 +109,7 @@ namespace MedicorpWeb.Controllers
             }
             else
             {
-                response.Fail();
+                response.ConstructErrorResponse("AccountController Authentication","");
             }
             return BadRequest(response);
         }

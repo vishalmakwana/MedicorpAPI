@@ -16,6 +16,7 @@ namespace Medicorp.Core.Entity.Master
        
         public string LongDescription { get; set; }
 
+        [Required(ErrorMessage = "MRP is required")]
         public string MRP { get; set; }
         
         public bool IsActive { get; set; }

@@ -107,7 +107,7 @@ namespace Medicorp.Services
             }
             catch (Exception ex)
             {
-                response.ConstructErrorResponse("UserMasterService GetProductAsync", ex.Message);
+                response.ConstructErrorResponse("UserMasterService GetUserAsync", ex.Message);
             }
             return response;
         }
@@ -125,7 +125,7 @@ namespace Medicorp.Services
                         throw new OperationExecutionException("User name is not valid");
                     bool validationResponse = await ValidateAsync(userMaster.Id, userMaster.Username);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Product name is already exists");
+                        throw new OperationExecutionException("User name is already exists");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@Username", userMaster.Username, DbType.String);
