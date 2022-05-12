@@ -34,16 +34,28 @@ namespace MedicorpWeb
         {
             services.AddControllers();
             services.AddControllersWithViews();
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")));
+            services.AddDbContext<ApplicationDbContext>(
+                options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"),
+                    sqlServerOptionsAction: sqlOptions =>
+                    {
+                        sqlOptions.EnableRetryOnFailure(
+                        maxRetryCount: 5,
+                        maxRetryDelay: TimeSpan.FromSeconds(30),
+                        errorNumbersToAdd:null);
+                    }));
 
             services.AddScoped<IDapperHelper, DapperHelper>();
-            services.AddScoped<IOrganizationMaster, OrganizationMasterService>();
+           services.AddScoped<IOrganizationMaster, OrganizationMasterService>();
+            services.AddScoped<ICategoryMasterService, CategoryMasterService>();
+            services.AddScoped<IProductMasterService, ProductMasterService>();
+            services.AddScoped<IRolesServicecs, RolesService>();
+            services.AddScoped<IUserMasterService, UserMasterService>();
+            services.AddScoped<IUserRolesService, UserRolesService>();
+            services.AddScoped<ICityMasterService, CityMasterService>();
             services.AddScoped<IDoctorMasterServices, DoctorMasterServices>();
             services.AddScoped<IStateMasterService, StateMasterService>();
-            services.AddScoped<ICityMasterService, CityMasterService>();
 
-
-           //Configuration of identity.
+            //Configuration of identity.
             _ = services.AddIdentity<ApplicationUser, IdentityRole>(
                 options =>
                 {
@@ -143,8 +155,6 @@ namespace MedicorpWeb
             {
                 endpoints.MapControllers();
             });
-           
-
         }
     }
 }

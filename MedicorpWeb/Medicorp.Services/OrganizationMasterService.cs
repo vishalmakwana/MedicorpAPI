@@ -4,12 +4,7 @@ using Medicorp.Core.CustomException;
 using Medicorp.Core.Entity;
 using Medicorp.Data.InterFace;
 using Medicorp.IServices;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Transactions;
 
 namespace Medicorp.Services
