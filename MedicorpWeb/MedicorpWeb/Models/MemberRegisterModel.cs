@@ -4,6 +4,7 @@ namespace MedicorpWeb.Model
 {
     public class MemberRegisterModel
     {
+       
         [Required, MaxLength(256)]
         [EmailAddress]
         public string Email { get; set; }
@@ -17,6 +18,8 @@ namespace MedicorpWeb.Model
         public string FirstName { get; set; }
         [Required, MaxLength(256)]
         public string LastName { get; set; }
+
+        public Boolean IsActive { get; set; }
 
     }
 }

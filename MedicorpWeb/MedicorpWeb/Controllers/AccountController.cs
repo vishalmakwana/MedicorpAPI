@@ -31,7 +31,7 @@ namespace MedicorpWeb.Controllers
         {
             if (ModelState.IsValid)
             {
-                var member = new ApplicationUser { UserName = model.Email, PhoneNumber = model.MobileNo, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName };
+                var member = new ApplicationUser { UserName = model.Email, PhoneNumber = model.MobileNo, Email = model.Email, FirstName = model.FirstName, LastName = model.LastName , IsActive = model.IsActive };
                 var result = await _userManager.CreateAsync(member, model.Password);
 
                 if (result.Succeeded)
@@ -97,6 +97,7 @@ namespace MedicorpWeb.Controllers
                 );
                 response.Result = new AuthResponseModel()
                 {
+                    IsActive = user.IsActive,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     LastName = user.LastName,
