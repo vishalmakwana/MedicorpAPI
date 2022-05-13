@@ -88,7 +88,6 @@ namespace Medicorp.Services
                 dbPara.Add("@CategoryName", filter.CategoryName, DbType.String);
                 dbPara.Add("@OrganizationId", filter.OrganizationId, DbType.Int32);
                 dbPara.Add("@IsActive", filter.IsActive, DbType.Boolean);
-                dbPara.Add("@OrganizationName", filter.OrganizationName, DbType.Boolean);
                 response.Result = await _dapperHelper.GetAllAsync<T>(sp: SqlObjectName.CategoryMasterSelect,
                                               parms: dbPara,
                                               commandType: CommandType.StoredProcedure);
@@ -117,11 +116,12 @@ namespace Medicorp.Services
                         throw new OperationExecutionException("Category name is already exists");
 
                     DynamicParameters dbPara = new DynamicParameters();
+                    dbPara.Add("@CategoryId", categoryMaster.CategoryId, DbType.Int32);
                     dbPara.Add("@CategoryName", categoryMaster.CategoryName, DbType.String);
                     dbPara.Add("@OrganizationId", categoryMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", categoryMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@UpdateBy", categoryMaster.UpdatedBy, DbType.String);
-                    dbPara.Add("@UpdatedDate", categoryMaster.UpdateDate, DbType.DateTime);
+                    dbPara.Add("@UpdateDate", categoryMaster.UpdateDate, DbType.DateTime);
                     response.Result = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.CategoryMasterUpdate,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);

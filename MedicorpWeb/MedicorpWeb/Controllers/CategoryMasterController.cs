@@ -34,8 +34,9 @@ namespace MedicorpWeb.Controllers
             ApiResponse<int> response = await _categoryMasterService.UpdateAsync(
                 new CategoryMaster()
                 {
+                    CategoryId = model.CategoryId,
                     OrganizationId = model.OrganizationId,
-                   CategoryName = model.CategoryName,
+                    CategoryName = model.CategoryName,
                     IsActive = model.IsActive,
                     UpdatedBy = GetUserId(User),
                     UpdateDate = DateTime.UtcNow

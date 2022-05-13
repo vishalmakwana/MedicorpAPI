@@ -59,6 +59,7 @@ namespace MedicorpWeb.Controllers
             ApiResponse<int> response = await _doctorMasterServices.UpdateAsync(
                 new DoctorMaster()
                 {
+                    DoctorId = model.DoctorId,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Gender = model.Gender,

@@ -9,7 +9,5 @@
         public bool IsActive { get; set; }
 
         public int OrganizationId { get; set; }
-
-        public string OrganizationName { get; set; }
     }
 }

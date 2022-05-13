@@ -118,11 +118,12 @@ namespace Medicorp.Services
                 try
                 {
                     if (doctorMaster.DoctorId == 0)
-                        throw new OperationExecutionException("Product Id is not valid");
+                        throw new OperationExecutionException("Doctor Id is not valid");
                     if (string.IsNullOrEmpty(doctorMaster.FirstName))
-                        throw new OperationExecutionException("Product name is not valid");
+                        throw new OperationExecutionException("Doctor name is not valid");
 
                     DynamicParameters dbPara = new DynamicParameters();
+                    dbPara.Add("@DoctorId", doctorMaster.DoctorId, DbType.Int32);
                     dbPara.Add("@FirstName", doctorMaster.FirstName, DbType.String);
                     dbPara.Add("@LastName", doctorMaster.LastName, DbType.String);
                     dbPara.Add("@Gender", doctorMaster.Gender, DbType.String);
@@ -134,7 +135,7 @@ namespace Medicorp.Services
                     dbPara.Add("@OrganizationId", doctorMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", doctorMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@UpdateBy", doctorMaster.UpdatedBy, DbType.String);
-                    dbPara.Add("@UpdatedDate", doctorMaster.UpdateDate, DbType.DateTime);
+                    dbPara.Add("@UpdateDate", doctorMaster.UpdateDate, DbType.DateTime);
                     response.Result = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.ProductMasterUpdate,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);

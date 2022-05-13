@@ -79,5 +79,14 @@ namespace Medicorp.Core
         public const string CategoryMasterValidateCategoryName = "Proc_CategoryMaster_Validate_CategoryName";
         #endregion
 
+        #region Speciality Master Object Name
+
+        public const string SpecialityMasterSelect = "Proc_Speciality_Select";
+        public const string SpecialityMasterInsert = "Proc_Speciality_Insert";
+        public const string SpecialityMasterUpdate = "Proc_Speciality_Update";
+        public const string SpecialityMasterDelete = "Proc_Speciality_Delete";
+        public const string SpecialityMasterValidateTitle = "Proc_Speciality_Validate_Title";
+        public const string SpecialityMasteeValidateExistsTitle = "Proc_Speciality_Exists_Title";
+        #endregion
     }
 }
