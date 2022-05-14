@@ -41,7 +41,8 @@ namespace MedicorpWeb.Controllers
                     MRP = model.MRP,
                     IsActive = model.IsActive,
                     UpdatedBy = GetUserId(User),
-                    UpdateDate = DateTime.UtcNow
+                    UpdateDate = DateTime.UtcNow,
+                     CategoryId = model.CategoryId
                 });
             if (response.Success)
                 return Ok(response);
@@ -63,7 +64,9 @@ namespace MedicorpWeb.Controllers
                     OrganizationId= model.OrganizationId,
                     IsActive = model.IsActive,
                     InsertdBy = GetUserId(User),
-                    InsertedDate = DateTime.UtcNow
+                    InsertedDate = DateTime.UtcNow,
+                    CategoryId=model.CategoryId
+
                 });
             if (response.Success)
                 return Ok(response);

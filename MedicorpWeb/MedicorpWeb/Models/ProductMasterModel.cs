@@ -20,5 +20,7 @@ namespace MedicorpWeb.Models
         public string MRP { get; set; }
         public bool IsActive { get; set; }
         public int OrganizationId { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }

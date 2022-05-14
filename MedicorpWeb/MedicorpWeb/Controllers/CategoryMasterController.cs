@@ -2,6 +2,7 @@
 using Medicorp.Core.Entity.Master;
 using Medicorp.IServices;
 using MedicorpWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicorpWeb.Controllers
@@ -15,6 +16,7 @@ namespace MedicorpWeb.Controllers
             _categoryMasterService = categoryMasterService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("GetCategory")]
         public async Task<IActionResult> Read(int id)
@@ -26,6 +28,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
 
+        [AllowAnonymous]
         [HttpPut]
         [Route("UpdateCategory")]
         public async Task<IActionResult> Update([FromBody] CategoryMasterModel model)
@@ -44,7 +47,7 @@ namespace MedicorpWeb.Controllers
                 return Ok(response);
             return BadRequest(response);
         }
-
+        [AllowAnonymous]
         [HttpPost]
         [Route("CreateCategory")]
         public async Task<IActionResult> Create([FromBody] CategoryMasterModel model)
@@ -63,7 +66,7 @@ namespace MedicorpWeb.Controllers
                 return Ok(response);
             return BadRequest(response);
         }
-
+        [AllowAnonymous]
         [HttpDelete]
         [Route("DeleteCategory")]
         public async Task<IActionResult> Delete([FromQuery] int id)

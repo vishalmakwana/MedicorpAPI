@@ -30,6 +30,8 @@ namespace Medicorp.Core.Entity.Master
         public DateTime InsertedDate { get; set; }
 
         public DateTime UpdateDate { get; set; }
+
+        public int CategoryId { get; set; }
     }
 
     public class ProductMasterFilter

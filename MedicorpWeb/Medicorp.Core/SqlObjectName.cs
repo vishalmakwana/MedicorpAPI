@@ -79,5 +79,9 @@ namespace Medicorp.Core
         public const string CategoryMasterValidateCategoryName = "Proc_CategoryMaster_Validate_CategoryName";
         #endregion
 
+        #region Product Category Mapping Object Name
+        public const string ProductCategoryMappingInsert = "Proc_ProductCategoryMappingInsert";
+        #endregion
+
     }
 }

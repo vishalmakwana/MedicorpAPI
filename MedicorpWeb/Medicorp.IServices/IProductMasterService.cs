@@ -10,5 +10,6 @@ namespace Medicorp.IServices
         Task<ApiResponse<int>> CreateAsync(ProductMaster productMaster);
         Task<ApiResponse<int>> DeleteAsync(int ProductId);
         Task<ApiResponse<List<T>>> GetProductAsync<T>(ProductMasterFilter filter) where T : class;
+
     }
 }

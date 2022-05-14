@@ -5,6 +5,7 @@ using Medicorp.Core.Entity.Master;
 using Medicorp.Data.InterFace;
 using Medicorp.IServices;
 using System.Data;
+using System.Security.Claims;
 using System.Transactions;
 
 namespace Medicorp.Services
@@ -12,9 +13,11 @@ namespace Medicorp.Services
     public class ProductMasterService : IProductMasterService
     {
         private readonly IDapperHelper _dapperHelper;
-        public ProductMasterService(IDapperHelper dapperHelper)
+        private readonly IProductCategoryMappingService _productCategoryMappingService;
+        public ProductMasterService(IDapperHelper dapperHelper, IProductCategoryMappingService productCategoryMappingService)
         {
             _dapperHelper = dapperHelper;
+            _productCategoryMappingService = productCategoryMappingService;
         }
 
         async Task<ApiResponse<int>> IProductMasterService.CreateAsync(ProductMaster productMaster)
@@ -43,6 +46,16 @@ namespace Medicorp.Services
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
 
+                  await _productCategoryMappingService.CreateAsync(
+                        new ProductCategoryMapping()
+                        {
+                                ProductId = response.Result,
+                                CategoryId = productMaster.CategoryId,
+                                OrganizationId = productMaster.OrganizationId,
+                                IsActive = true,
+                                InsertdBy = productMaster.InsertdBy,
+                                InsertedDate = productMaster.InsertedDate,
+                        });
                     transactionScope.Complete();
                 }
                 catch (Exception ex)
@@ -167,5 +180,6 @@ namespace Medicorp.Services
                                             commandType: CommandType.StoredProcedure);
             return response;
         }
-    }
+
+     }
 }
