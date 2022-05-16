@@ -16,7 +16,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("getState")]
+        [Route("GetState")]
         public async Task<IActionResult> Read(int id)
         {
             StateMaster stateMaster = new StateMaster() { StateId = id };
@@ -26,7 +26,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
         [HttpPost]
-        [Route("createState")]
+        [Route("CreateState")]
         public async Task<IActionResult> Create([FromBody] StateMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));

@@ -55,6 +55,7 @@ namespace MedicorpWeb
             services.AddScoped<IDoctorMasterServices, DoctorMasterServices>();
             services.AddScoped<IStateMasterService, StateMasterService>();
             services.AddScoped<IProductCategoryMappingService, ProductCategoryMappingService>();
+            services.AddScoped<ISpecialityMasterService, SpecialityMasterService>();
 
             //Configuration of identity.
             _ = services.AddIdentity<ApplicationUser, IdentityRole>(

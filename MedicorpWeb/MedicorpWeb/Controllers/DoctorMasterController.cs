@@ -15,7 +15,7 @@ namespace MedicorpWeb.Controllers
             _doctorMasterServices = doctorMasterServices;
         }
         [HttpPost]
-        [Route("createDoctor")]
+        [Route("CreateDoctor")]
         public async Task<IActionResult> Create([FromBody] DoctorMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
@@ -41,7 +41,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("getDoctor")]
+        [Route("GetDoctor")]
         public async Task<IActionResult> Read(int id)
         {
             DoctorMasterFilter filter = new DoctorMasterFilter() { DoctorId = id };
@@ -52,13 +52,14 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpPut]
-        [Route("updateDoctor")]
+        [Route("UpdateDoctor")]
         public async Task<IActionResult> Update([FromBody] DoctorMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
             ApiResponse<int> response = await _doctorMasterServices.UpdateAsync(
                 new DoctorMaster()
                 {
+                    DoctorId = model.DoctorId,
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     Gender = model.Gender,
@@ -77,7 +78,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
         [HttpDelete]
-        [Route("deleteDoctor")]
+        [Route("DeleteDoctor")]
         public async Task<IActionResult> Delete([FromQuery] int id)
         {
             ApiResponse<int> response = await _doctorMasterServices.DeleteAsync(id);

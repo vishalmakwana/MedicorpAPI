@@ -27,7 +27,7 @@ namespace MedicorpWeb.Controllers
                 return Ok(response);
             return BadRequest(response);
         }
-
+        
         [AllowAnonymous]
         [HttpPut]
         [Route("UpdateCategory")]

@@ -6,7 +6,7 @@ namespace Medicorp.Core.Entity.Master
 {
     public class SpecilityMaster
     {
-        public int SpecilityId { get; set; }
+        public int SpecialityId { get; set; }
 
         [Required(ErrorMessage = "Title is required")]
         public string Title { get; set; }
@@ -29,7 +29,7 @@ namespace Medicorp.Core.Entity.Master
 
     public class SpecilityMasterFilter
     {
-        public int SpecilityId { get; set; }
+        public int SpecialityId { get; set; }
         
         public string Title { get; set; }
 

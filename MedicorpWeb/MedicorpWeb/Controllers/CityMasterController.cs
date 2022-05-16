@@ -16,7 +16,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [HttpGet]
-        [Route("getCity")]
+        [Route("GetCity")]
         public async Task<IActionResult> Read(int id)
         {
             CityMaster cityMaster = new CityMaster() { CityId = id };
@@ -26,7 +26,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
         [HttpPost]
-        [Route("createCity")]
+        [Route("CreateCity")]
         public async Task<IActionResult> Create([FromBody] CityMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
