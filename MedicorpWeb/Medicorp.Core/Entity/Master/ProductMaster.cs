@@ -11,11 +11,9 @@ namespace Medicorp.Core.Entity.Master
         [Required(ErrorMessage = "Product Name is required")]
         public string ProductName { get; set; }
 
-        [Required(ErrorMessage = "ShortDescription is required")]
-        public string ShortDescription { get; set; }
+        [Required(ErrorMessage = "ProductDescription is required")]
+        public string ProductDescription { get; set; }
        
-        public string LongDescription { get; set; }
-
         [Required(ErrorMessage = "MRP is required")]
         public string MRP { get; set; }
         
@@ -39,9 +37,7 @@ namespace Medicorp.Core.Entity.Master
         public int ProductId { get; set; }
         public string ProductName { get; set; }
 
-        public string ShortDescription { get; set; }
-
-        public string LongDescription { get; set; }
+        public string ProductDescription { get; set; }
 
         public string OrganizationName { get; set; }
 

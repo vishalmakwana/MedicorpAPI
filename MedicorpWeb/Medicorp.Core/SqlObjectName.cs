@@ -80,7 +80,7 @@ namespace Medicorp.Core
         #endregion
 
         #region Product Category Mapping Object Name
-        public const string ProductCategoryMappingInsert = "Proc_ProductCategoryMappingInsert";
+        public const string ProductCategoryMappingInsert = "Proc_ProductCategoryMapping_Insert";
         #endregion
 
     }

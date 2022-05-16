@@ -24,7 +24,7 @@ namespace Medicorp.Services
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
-            {
+            { 
                 try
                 {
                     if (string.IsNullOrEmpty(productMaster.ProductName))
@@ -35,9 +35,8 @@ namespace Medicorp.Services
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@ProductName", productMaster.ProductName, DbType.String);
-                    dbPara.Add("@LongDescription", productMaster.LongDescription, DbType.String);
-                    dbPara.Add("@ShortDescription", productMaster.ShortDescription, DbType.String);
-                    dbPara.Add("@MRP", productMaster.MRP, DbType.String);
+                    dbPara.Add("@ProductDescription", productMaster.ProductDescription, DbType.String);
+                   dbPara.Add("@MRP", productMaster.MRP, DbType.String);
                     dbPara.Add("@OrganizationId", productMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", productMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@InsertBy", productMaster.InsertdBy, DbType.String);
@@ -46,7 +45,10 @@ namespace Medicorp.Services
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
 
-                  await _productCategoryMappingService.CreateAsync(
+                  
+                       
+                    
+                    await _productCategoryMappingService.CreateAsync(
                         new ProductCategoryMapping()
                         {
                                 ProductId = response.Result,
@@ -56,12 +58,15 @@ namespace Medicorp.Services
                                 InsertdBy = productMaster.InsertdBy,
                                 InsertedDate = productMaster.InsertedDate,
                         });
+                   
                     transactionScope.Complete();
+
                 }
                 catch (Exception ex)
                 {
-                    response.ConstructErrorResponse("ProductMasterService CreateAsync", ex.Message);
+                    response.ConstructErrorResponse("ProductMasterService CreateAsync", ex.Message);                    
                 }
+                
             }
             return response;
         }
@@ -104,8 +109,7 @@ namespace Medicorp.Services
             {
                 DynamicParameters dbPara = new DynamicParameters();
                 dbPara.Add("@ProductName", filter.ProductName, DbType.String);
-                dbPara.Add("@LongDescription", filter.LongDescription, DbType.String);
-                dbPara.Add("@ShortDescription", filter.ShortDescription, DbType.String);
+                dbPara.Add("@ProductDescription", filter.ProductDescription, DbType.String);
                 dbPara.Add("@MRP", filter.MRP, DbType.String);
                 dbPara.Add("@OrganizationId", filter.OrganizationId, DbType.Int32);
                 dbPara.Add("@IsActive", filter.IsActive, DbType.Boolean);
@@ -138,8 +142,7 @@ namespace Medicorp.Services
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@ProductName", productMaster.ProductName, DbType.String);
-                    dbPara.Add("@LongDescription", productMaster.LongDescription, DbType.String);
-                    dbPara.Add("@ShortDescription", productMaster.ShortDescription, DbType.String);
+                    dbPara.Add("@ProductDescription", productMaster.ProductDescription, DbType.String);
                     dbPara.Add("@MRP", productMaster.MRP, DbType.String);
                     dbPara.Add("@OrganizationId", productMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", productMaster.IsActive, DbType.Boolean);

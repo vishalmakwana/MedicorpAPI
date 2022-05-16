@@ -35,14 +35,8 @@ namespace MedicorpWeb
             services.AddControllers();
             services.AddControllersWithViews();
             services.AddDbContext<ApplicationDbContext>(
-                options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection"),
-                    sqlServerOptionsAction: sqlOptions =>
-                    {
-                        sqlOptions.EnableRetryOnFailure(
-                        maxRetryCount: 5,
-                        maxRetryDelay: TimeSpan.FromSeconds(30),
-                        errorNumbersToAdd:null);
-                    }));
+                options => options.UseSqlServer(Configuration.GetConnectionString("SqlConnection")
+                   ));
 
             services.AddScoped<IDapperHelper, DapperHelper>();
            services.AddScoped<IOrganizationMaster, OrganizationMasterService>();

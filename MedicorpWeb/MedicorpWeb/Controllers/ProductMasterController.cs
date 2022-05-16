@@ -2,6 +2,7 @@
 using Medicorp.Core.Entity.Master;
 using Medicorp.IServices;
 using MedicorpWeb.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace MedicorpWeb.Controllers
@@ -15,6 +16,7 @@ namespace MedicorpWeb.Controllers
             _productMasterService = productMasterService;
         }
 
+        [AllowAnonymous]
         [HttpGet]
         [Route("GetProduct")]
         public async Task<IActionResult> Read(int id)
@@ -26,6 +28,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
 
+        [AllowAnonymous]
         [HttpPut]
         [Route("UpdateProduct")]
         public async Task<IActionResult> Update([FromBody] ProductMasterModel model)
@@ -36,8 +39,7 @@ namespace MedicorpWeb.Controllers
                 {
                     OrganizationId = model.OrganizationId,
                     ProductName = model.ProductName,
-                    ShortDescription = model.ShortDescription,
-                    LongDescription = model.LongDescription,
+                    ProductDescription=model.ProductDescription,
                     MRP = model.MRP,
                     IsActive = model.IsActive,
                     UpdatedBy = GetUserId(User),
@@ -49,6 +51,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
 
+        [AllowAnonymous]
         [HttpPost]
         [Route("InsertProduct")]
         public async Task<IActionResult> Create([FromBody] ProductMasterModel model)
@@ -58,8 +61,7 @@ namespace MedicorpWeb.Controllers
                 new ProductMaster()
                 {
                     ProductName = model.ProductName,
-                    ShortDescription = model.ShortDescription,
-                    LongDescription = model.LongDescription,
+                  ProductDescription=model.ProductDescription,
                     MRP = model.MRP,
                     OrganizationId= model.OrganizationId,
                     IsActive = model.IsActive,
@@ -73,6 +75,7 @@ namespace MedicorpWeb.Controllers
             return BadRequest(response);
         }
 
+        [AllowAnonymous]
         [HttpDelete]
         [Route("DeleteProduct")]
         public async Task<IActionResult> Delete([FromQuery] int id)
