@@ -94,6 +94,7 @@ namespace Medicorp.Services
                         throw new OperationExecutionException("Category name is already exists");
 
                     DynamicParameters dbPara = new DynamicParameters();
+                    dbPara.Add("@CategoryId", categoryMaster.CategoryId, DbType.Int32);
                     dbPara.Add("@CategoryName", categoryMaster.CategoryName, DbType.String);
                     dbPara.Add("@OrganizationId", categoryMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", categoryMaster.IsActive, DbType.Boolean);

@@ -100,7 +100,11 @@ namespace Medicorp.Services
                 return response;
             }
         }
+<<<<<<< HEAD
 
+=======
+        
+>>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
         public async Task<ApiResponse<int>> UpdateAsync(SpecilityMaster specilityMaster)
         {
 
@@ -109,22 +113,38 @@ namespace Medicorp.Services
             {
                 try
                 {
+<<<<<<< HEAD
                     if (specilityMaster.SpecialityId == 0)
                         throw new OperationExecutionException("Speciality Id is not valid");
                     if (string.IsNullOrEmpty(specilityMaster.Title))
                         throw new OperationExecutionException("Title is not valid");
                     bool validationResponse = await ValidateAsync(specilityMaster.SpecialityId, specilityMaster.Title);
+=======
+                    if (specilityMaster.SpecilityId == 0)
+                        throw new OperationExecutionException("Speciality Id is not valid");
+                    if (string.IsNullOrEmpty(specilityMaster.Title))
+                        throw new OperationExecutionException("Title is not valid");
+                    bool validationResponse = await ValidateAsync(specilityMaster.SpecilityId, specilityMaster.Title);
+>>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
                     if (!validationResponse)
                         throw new OperationExecutionException("Title is already exists");
 
                     DynamicParameters dbPara = new DynamicParameters();
+<<<<<<< HEAD
                     dbPara.Add("@SpecialityId", specilityMaster.SpecialityId, DbType.Int32);
+=======
+                    dbPara.Add("@SpecilityId", specilityMaster.SpecilityId, DbType.Int32);
+>>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
                     dbPara.Add("@Title", specilityMaster.Title, DbType.String);
                     dbPara.Add("@SpecialityDescription", specilityMaster.Description, DbType.String);
                     dbPara.Add("@OrganizationId", specilityMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", specilityMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@UpdateBy", specilityMaster.UpdatedBy, DbType.String);
+<<<<<<< HEAD
                     dbPara.Add("@UpdateDate", specilityMaster.UpdateDate, DbType.DateTime);
+=======
+                    dbPara.Add("@UpdatedDate", specilityMaster.UpdateDate, DbType.DateTime);
+>>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
                     response.Result = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.SpecialityMasterUpdate,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
@@ -154,7 +174,11 @@ namespace Medicorp.Services
         {
             DynamicParameters dbPara = new DynamicParameters();
             dbPara.Add("@Title", Title, DbType.String);
+<<<<<<< HEAD
             bool response = await _dapperHelper.GetAsync<bool>(sp: SqlObjectName.SpecialityMasterValidateExistsTitle,
+=======
+            bool response = await _dapperHelper.GetAsync<bool>(sp: SqlObjectName.SpecialityMasteeValidateExistsTitle,
+>>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
                                             parms: dbPara,
                                             commandType: CommandType.StoredProcedure);
             return response;
