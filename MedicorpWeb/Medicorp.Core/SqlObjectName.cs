@@ -11,11 +11,6 @@ namespace Medicorp.Core
         #region Organization Master Object Name
 
         public const string OrganizationMasterSelect = "Proc_OrganizationMaster_Select";
-        public const string OrganizationMasterInsert = "Proc_OrganizationMaster_Insert";
-        public const string OrganizationMasterUpdate = "Proc_OrganizationMaster_Update";
-        public const string OrganizationMasterDelete = "Proc_OrganizationMaster_Delete";
-        public const string OrganizationMasterExistOrganizationName = "Proc_OrganizationMaster_Exit_OrganizationName";
-        public const string OrganizationMasterValidateOrganizationName = "Proc_ OrganizationMaster_Validate_OrganizationName";
         #endregion
 
         #region Product Master Object Name
@@ -53,20 +48,22 @@ namespace Medicorp.Core
         public const string DoctorUpdate = "Proc_Doctor_Update";
         public const string DoctorDelete = "Proc_Doctor_Delete";
         public const string DoctorValidate = "Proc_Doctor_Validate";
+        public const string DoctorMasterValidateEmail = "Proc_Doctor_Validate_Email";
+        public const string DoctorMasterValidateExistsEmail = "Proc_Doctor_Exists_Email";
         #endregion
 
         #region City Master Object Name
 
         public const string CityMasterSelect = "Proc_CityMaster_Select";
         public const string CityMasterInsert = "Proc_CityMaster_Insert";
-        public const string CityMasterValidate = "Proc_CityMaster_Validate_CityName";
+        public const string CityMasterValidate = "Proc_CityMaster_Exist_CityName";
         #endregion
 
         #region State Master Object Name
 
         public const string StateMasterSelect = "Proc_StateMaster_Select";
         public const string StateMasterInsert = "Proc_StateMaster_Insert";
-        public const string StateMasterValidate = "Proc_StateMaster_Validate_StateName";
+        public const string StateMasterValidate = "Proc_StateMaster_Exist_StateName";
         #endregion
 
         #region Category Master Object Name
@@ -83,5 +80,18 @@ namespace Medicorp.Core
         public const string ProductCategoryMappingInsert = "Proc_ProductCategoryMapping_Insert";
         #endregion
 
+        #region Speciality Master Object Name
+
+        public const string SpecialityMasterSelect = "Proc_Speciality_Select";
+        public const string SpecialityMasterInsert = "Proc_Speciality_Insert";
+        public const string SpecialityMasterUpdate = "Proc_Speciality_Update";
+        public const string SpecialityMasterDelete = "Proc_Speciality_Delete";
+        public const string SpecialityMasterValidateTitle = "Proc_Speciality_Validate_Title";
+        public const string SpecialityMasterValidateExistsTitle = "Proc_Speciality_Exists_Title";
+        #endregion
+
+        #region
+        public const string SpecialityMasteeValidateExistsTitle = "Proc_Speciality_Exists_Title";
+        #endregion
     }
 }

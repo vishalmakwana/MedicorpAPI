@@ -26,7 +26,7 @@ namespace MedicorpWeb.Controllers
         }
 
         [AllowAnonymous]
-        [HttpPost("register")]
+        [HttpPost("Register")]
         public async Task<IActionResult> Register(MemberRegisterModel model)
         {
             if (ModelState.IsValid)
@@ -53,7 +53,7 @@ namespace MedicorpWeb.Controllers
 
         private const string InvalidLoginDetails = "Invalid login details.";
         [AllowAnonymous]
-        [HttpPost("authentication")]
+        [HttpPost("Authentication")]
         public async Task<IActionResult> Authentication([FromBody] MemberCredentialModel userCredential)
         {
             ApiResponse<AuthResponseModel> response = new ApiResponse<AuthResponseModel>() { Success = true };

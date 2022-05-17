@@ -39,7 +39,7 @@ namespace MedicorpWeb
                    ));
 
             services.AddScoped<IDapperHelper, DapperHelper>();
-           services.AddScoped<IOrganizationMaster, OrganizationMasterService>();
+            services.AddScoped<IOrganizationMaster, OrganizationMasterService>();
             services.AddScoped<ICategoryMasterService, CategoryMasterService>();
             services.AddScoped<IProductMasterService, ProductMasterService>();
             services.AddScoped<IRolesServicecs, RolesService>();
@@ -49,6 +49,7 @@ namespace MedicorpWeb
             services.AddScoped<IDoctorMasterServices, DoctorMasterServices>();
             services.AddScoped<IStateMasterService, StateMasterService>();
             services.AddScoped<IProductCategoryMappingService, ProductCategoryMappingService>();
+            services.AddScoped<ISpecialityMasterService, SpecialityMasterService>();
 
             //Configuration of identity.
             _ = services.AddIdentity<ApplicationUser, IdentityRole>(

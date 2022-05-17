@@ -4,7 +4,7 @@ using System.Security.Claims;
 
 namespace MedicorpWeb.Controllers
 {
-    
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ApiControllerBase : ControllerBase

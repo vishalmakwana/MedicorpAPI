@@ -50,7 +50,7 @@ namespace MedicorpWeb.Controllers
     }
 
     [HttpPost]
-    [Route("InsertUser")]
+    [Route("CreateUser")]
     public async Task<IActionResult> Create([FromBody] UserMasterModel model)
     {
         if (model == null) throw new ArgumentNullException(nameof(model));

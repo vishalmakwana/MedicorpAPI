@@ -30,7 +30,9 @@ namespace Medicorp.Services
                 {
                     if (string.IsNullOrEmpty(cityMaster.CityName))
                         throw new OperationExecutionException("City Name is not valid");
-
+                    bool validationResponse = await ValidateNameAsync(cityMaster.CityName);
+                    if (!validationResponse)
+                        throw new OperationExecutionException("City Name is already exists");
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@CityName", cityMaster.CityName, DbType.String);
                     dbPara.Add("@StateId", cityMaster.StateId, DbType.Int32);
@@ -69,6 +71,15 @@ namespace Medicorp.Services
             {
                 response.ConstructErrorResponse("CityMasterService GetProductAsync", ex.Message);
             }
+            return response;
+        }
+        public async Task<bool> ValidateNameAsync(string CityName)
+        {
+            DynamicParameters dbPara = new DynamicParameters();
+            dbPara.Add("@CityName", CityName, DbType.String);
+            bool response = await _dapperHelper.GetAsync<bool>(sp: SqlObjectName.CityMasterValidate,
+                                            parms: dbPara,
+                                            commandType: CommandType.StoredProcedure);
             return response;
         }
     }

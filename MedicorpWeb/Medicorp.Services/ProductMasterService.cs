@@ -147,7 +147,7 @@ namespace Medicorp.Services
                     dbPara.Add("@OrganizationId", productMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", productMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@UpdateBy", productMaster.UpdatedBy, DbType.String);
-                    dbPara.Add("@UpdatedDate", productMaster.UpdateDate, DbType.DateTime);
+                    dbPara.Add("@UpdateDate", productMaster.UpdateDate, DbType.DateTime);
                     response.Result = await _dapperHelper.GetAsync<int>(sp: SqlObjectName.ProductMasterUpdate,
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);

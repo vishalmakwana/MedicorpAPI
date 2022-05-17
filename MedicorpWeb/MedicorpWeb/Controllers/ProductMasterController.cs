@@ -53,7 +53,7 @@ namespace MedicorpWeb.Controllers
 
         [AllowAnonymous]
         [HttpPost]
-        [Route("InsertProduct")]
+        [Route("CreateProduct")]
         public async Task<IActionResult> Create([FromBody] ProductMasterModel model)
         {
             if (model == null) throw new ArgumentNullException(nameof(model));
