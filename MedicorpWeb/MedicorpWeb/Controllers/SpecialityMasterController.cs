@@ -26,11 +26,7 @@ namespace MedicorpWeb.Controllers
                     Title = model.Title,
                     Description = model.Description,
                     IsActive = model.IsActive,
-<<<<<<< HEAD
                     InsertdBy = GetUserId(User),
-=======
-                    InsertdBy = GetUserId(User),    
->>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
                     InsertedDate = DateTime.UtcNow
                 });
 
@@ -43,11 +39,7 @@ namespace MedicorpWeb.Controllers
         [Route("GetSpeciality")]
         public async Task<IActionResult> Read(int id)
         {
-<<<<<<< HEAD
             SpecilityMasterFilter filter = new SpecilityMasterFilter() { SpecialityId = id };
-=======
-            SpecilityMasterFilter filter = new SpecilityMasterFilter() { SpecilityId = id };
->>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
             ApiResponse<List<SpecialityMasterModel>> response = await _specialityMasterService.GetSpecialityAsync<SpecialityMasterModel>(filter);
             if (response.Success)
                 return Ok(response);
@@ -62,11 +54,7 @@ namespace MedicorpWeb.Controllers
             ApiResponse<int> response = await _specialityMasterService.UpdateAsync(
                 new SpecilityMaster()
                 {
-<<<<<<< HEAD
                     SpecialityId = model.SpecialityId,
-=======
-                    SpecilityId = model.SpecilityId,
->>>>>>> efbde2b0d63a6da6132242e2ed57eea04d9abe47
                     OrganizationId = model.OrganizationId,
                     Title = model.Title,
                     Description = model.Description,
