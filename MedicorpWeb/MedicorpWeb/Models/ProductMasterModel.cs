@@ -5,6 +5,8 @@ namespace MedicorpWeb.Models
     public class ProductMasterModel
     {
 
+        public int ProductId { get; set; }
+
         [Required(ErrorMessage = "Product Name is required")]
         public string ProductName { get; set; }
 

@@ -37,6 +37,7 @@ namespace MedicorpWeb.Controllers
             ApiResponse<int> response = await _productMasterService.UpdateAsync(
                 new ProductMaster()
                 {
+                    ProductId=model.ProductId,
                     OrganizationId = model.OrganizationId,
                     ProductName = model.ProductName,
                     ProductDescription=model.ProductDescription,
