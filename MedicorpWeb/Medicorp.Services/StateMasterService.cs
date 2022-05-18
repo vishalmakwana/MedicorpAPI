@@ -24,15 +24,23 @@ namespace Medicorp.Services
         async Task<ApiResponse<int>> IStateMasterService.CreateAsync(StateMaster stateMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (string.IsNullOrEmpty(stateMaster.StateName))
-                        throw new OperationExecutionException("State Name is not valid");
+                        validation.source = "StateName";
+                        validation.keys.Add("StateName can not be allow null or empty.");
+
                     bool validationResponse = await ValidateNameAsync(stateMaster.StateName);
                     if (!validationResponse)
-                        throw new OperationExecutionException("State Name is already exists");
+                        validation.source = "StateName";
+                        validation.keys.Add("StateName is already exist.");
+
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@StateName", stateMaster.StateName, DbType.String);
                     dbPara.Add("@IsActive", stateMaster.IsActive, DbType.Boolean);
@@ -47,6 +55,7 @@ namespace Medicorp.Services
                     response.ConstructErrorResponse("StateMasterService CreateAsync", ex.Message);
                 }
             }
+            response.validation = validation;
             return response;
         }
         async Task<ApiResponse<List<StateMaster>>> IStateMasterService.GetStateAsync(StateMaster stateMaster)

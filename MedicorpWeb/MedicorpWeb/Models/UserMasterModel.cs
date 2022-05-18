@@ -20,12 +20,14 @@ namespace MedicorpWeb.Models
         public string Email { get; set; }
         public bool EmailConfirmed { get; set; }
 
+        [MaxLength(10)]
         [Required(ErrorMessage = "PhoneNumber is required")]
         public string PhoneNumber { get; set; }
         public bool PhoneNumberConfirmed { get; set; }
         public bool IsActive { get; set; }
+
+        [Required(ErrorMessage = "OrganizationID is required")]
         public int OrganizationId { get; set; }
 
-        public string OrganizationName { get; set; }
     }
 }

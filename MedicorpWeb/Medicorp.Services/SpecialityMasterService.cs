@@ -47,15 +47,29 @@ namespace Medicorp.Services
         public async Task<ApiResponse<int>> CreateAsync(SpecilityMaster specilityMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (string.IsNullOrEmpty(specilityMaster.Title))
-                        throw new OperationExecutionException("Title is not valid");
+                        validation.source = "Title";
+                        validation.keys.Add("Title can not be allow null or empty.");
+
                     bool validationResponse = await ValidateNameAsync(specilityMaster.Title);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Title is already exists");
+                        validation.source = "Title";
+                        validation.keys.Add("Title is already exist.");
+
+                    if (string.IsNullOrEmpty(specilityMaster.Description))
+                        validation.source = "Description";
+                        validation.keys.Add("Description can not be allow null or empty.");
+
+                    if (specilityMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@Title", specilityMaster.Title, DbType.String);
@@ -75,6 +89,7 @@ namespace Medicorp.Services
                     response.ConstructErrorResponse("SpecialityMasterService CreateAsync", ex.Message);
                 }
             }
+            response.validation = validation;
             return response;
         }
         public async Task<ApiResponse<int>> DeleteAsync(int SpecialityId)
@@ -104,17 +119,34 @@ namespace Medicorp.Services
         {
 
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (specilityMaster.SpecialityId == 0)
-                        throw new OperationExecutionException("Speciality Id is not valid");
+                        validation.source = "Title";
+                    validation.keys.Add("Title can not be allow 0.");
+
                     if (string.IsNullOrEmpty(specilityMaster.Title))
-                        throw new OperationExecutionException("Title is not valid");
+                        validation.source = "Title";
+                        validation.keys.Add("Title can not be allow null or empty.");
+
                     bool validationResponse = await ValidateAsync(specilityMaster.SpecialityId, specilityMaster.Title);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Title is already exists");
+                        validation.source = "Title";
+                        validation.keys.Add("Title is already exist.");
+
+                    if (string.IsNullOrEmpty(specilityMaster.Description))
+                        validation.source = "Description";
+                        validation.keys.Add("Description can not be allow null or empty.");
+
+                    if (specilityMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
 
@@ -142,6 +174,7 @@ namespace Medicorp.Services
                 }
 
             }
+            response.validation = validation;
             return response;
         }
         public async Task<bool> ValidateAsync(int SpecialityId, string Title)

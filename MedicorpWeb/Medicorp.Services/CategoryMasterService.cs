@@ -20,16 +20,23 @@ namespace Medicorp.Services
         public async Task<ApiResponse<int>> CreateAsync(CategoryMaster categoryMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+           
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
+                  
                     if (string.IsNullOrEmpty(categoryMaster.CategoryName))
-                        throw new OperationExecutionException("Category Name is not valid");
+                        validation.source = "Categoory Name";
+                        validation.keys.Add("Category Name can not be allow null or empty.");
+                                                                
                     bool validationResponse = await ValidateNameAsync(categoryMaster.CategoryName);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Category Name is already exists");
-
+                        validation.source = "Categoory Name";
+                        validation.keys.Add("Category Name is already exist.");
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@CategoryName", categoryMaster.CategoryName, DbType.String);
                     dbPara.Add("@OrganizationId", categoryMaster.OrganizationId, DbType.Int32);
@@ -40,13 +47,15 @@ namespace Medicorp.Services
                                                   parms: dbPara,
                                                   commandType: CommandType.StoredProcedure);
 
+
                     transactionScope.Complete();
                 }
                 catch (Exception ex)
                 {
-                    response.ConstructErrorResponse("CategoryMasterService CreateAsync", ex.Message);
+                   response.ConstructErrorResponse("CategoryMasterService CreateAsync", ex.Message);
                 }
             }
+            response.validation = validation;
             return response;
         }
 
@@ -81,17 +90,29 @@ namespace Medicorp.Services
         {
 
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
-                    if (categoryMaster.CategoryId == 0)
-                        throw new OperationExecutionException("Category Id is not valid");
+                    if (categoryMaster.CategoryId <= 0)
+                        validation.source = "Categoory Id";
+                        validation.keys.Add("CategoryId can not be allow 0.");
+
                     if (string.IsNullOrEmpty(categoryMaster.CategoryName))
-                        throw new OperationExecutionException("Category name is not valid");
+                        validation.source = "Categoory Name";
+                        validation.keys.Add("Category Name can not be allow null or empty.");
+
                     bool validationResponse = await ValidateAsync(categoryMaster.CategoryId, categoryMaster.CategoryName);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Category name is already exists");
+                        validation.source = "Categoory Name";
+                        validation.keys.Add("Category Name is already exist.");
+
+                    if (categoryMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId Id";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@CategoryId", categoryMaster.CategoryId, DbType.Int32);
@@ -112,6 +133,7 @@ namespace Medicorp.Services
                 }
 
             }
+            response.validation = validation;
             return response;
         }
         public async Task<ApiResponse<int>> DeleteAsync(int categoryId)

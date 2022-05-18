@@ -12,7 +12,7 @@ namespace MedicorpWeb.Models
         public string Description { get; set; }
 
         public bool IsActive { get; set; }
-
+        [Required(ErrorMessage = "OrganizationId is required")]
         public int OrganizationId { get; set; }
     }
 }

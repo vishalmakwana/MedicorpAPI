@@ -27,13 +27,14 @@ namespace Medicorp.Core
             ErrorTitle = title;
             ErrorMessage = message;
             IsError = true;
+            Success = false;
         }
     }
 
     public class Validation
     {
         public string source { get; set; }
-        public string[] keys { get; set; }
+        public List<string>? keys { get; set; }
     }
 
 }

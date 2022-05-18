@@ -14,8 +14,11 @@ namespace MedicorpWeb.Models
         [Required(ErrorMessage = "MRP is required")]
         public string MRP { get; set; }
         public bool IsActive { get; set; }
+
+        [Required(ErrorMessage = "OrganizationID is required")]
         public int OrganizationId { get; set; }
 
+        [Required(ErrorMessage = "CategoryID is required")]
         public int CategoryId { get; set; }
     }
 }

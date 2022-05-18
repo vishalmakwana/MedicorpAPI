@@ -23,20 +23,43 @@ namespace Medicorp.Services
         async Task<ApiResponse<int>> IProductMasterService.CreateAsync(ProductMaster productMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             { 
                 try
                 {
                     if (string.IsNullOrEmpty(productMaster.ProductName))
-                        throw new OperationExecutionException("Product Name is not valid");
+                        validation.source = "ProductName";
+                        validation.keys.Add("ProductName can not be allow null or empty.");
+
                     bool validationResponse = await ValidateNameAsync(productMaster.ProductName);
-                    if (!validationResponse)
-                        throw new OperationExecutionException("Product Name is already exists");
+                    if (!validationResponse) 
+                        validation.source = "ProductName";
+                        validation.keys.Add("ProductName is already exist.");
+
+                    if (string.IsNullOrEmpty(productMaster.ProductDescription))
+                        validation.source = "ProductDescription";
+                        validation.keys.Add("ProductDescription can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(productMaster.MRP))
+                        validation.source = "MRP";
+                        validation.keys.Add("MRP can not be allow null or empty.");
+
+                    if (productMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
+
+                    if (productMaster.CategoryId <= 0)
+                        validation.source = "CategoryId";
+                        validation.keys.Add("CategoryId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@ProductName", productMaster.ProductName, DbType.String);
                     dbPara.Add("@ProductDescription", productMaster.ProductDescription, DbType.String);
-                   dbPara.Add("@MRP", productMaster.MRP, DbType.String);
+                    dbPara.Add("@MRP", productMaster.MRP, DbType.String);
                     dbPara.Add("@OrganizationId", productMaster.OrganizationId, DbType.Int32);
                     dbPara.Add("@IsActive", productMaster.IsActive, DbType.Boolean);
                     dbPara.Add("@InsertBy", productMaster.InsertdBy, DbType.String);
@@ -68,6 +91,7 @@ namespace Medicorp.Services
                 }
                 
             }
+            response.validation = validation;
             return response;
         }
 
@@ -128,17 +152,42 @@ namespace Medicorp.Services
         async Task<ApiResponse<int>> IProductMasterService.UpdateAsync(ProductMaster productMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (productMaster.ProductId == 0)
-                        throw new OperationExecutionException("Product Id is not valid");
+                        validation.source = "ProductId";
+                        validation.keys.Add("ProductId can not be allow 0.");
+
                     if (string.IsNullOrEmpty(productMaster.ProductName))
-                        throw new OperationExecutionException("Product name is not valid");
+                        validation.source = "ProductName";
+                        validation.keys.Add("ProductName can not be allow null or empty.");
+
                     bool validationResponse = await ValidateAsync(productMaster.ProductId, productMaster.ProductName);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Product name is already exists");
+                        validation.source = "ProductName";
+                        validation.keys.Add("ProductName is already exist.");
+
+                    if (string.IsNullOrEmpty(productMaster.ProductDescription))
+                        validation.source = "ProductDescription";
+                        validation.keys.Add("ProductDescription can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(productMaster.MRP))
+                        validation.source = "MRP";
+                        validation.keys.Add("MRP can not be allow null or empty.");
+
+                    if (productMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
+
+                    if (productMaster.CategoryId <= 0)
+                        validation.source = "CategoryId";
+                        validation.keys.Add("CategoryId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@ProductName", productMaster.ProductName, DbType.String);
@@ -160,6 +209,7 @@ namespace Medicorp.Services
                 }
 
             }
+            response.validation = validation;
             return response;
         }
 

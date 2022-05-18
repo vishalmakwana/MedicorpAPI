@@ -21,15 +21,45 @@ namespace Medicorp.Services
         public async Task<ApiResponse<int>> CreateAsync(UserMaster userMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (string.IsNullOrEmpty(userMaster.Username))
-                        throw new OperationExecutionException("User Name is not valid");
+                        validation.source = "Username";
+                        validation.keys.Add("Username can not be allow null or empty.");
+
                     bool validationResponse = await ValidateNameAsync(userMaster.Username);
                     if (!validationResponse)
-                        throw new OperationExecutionException("User Name is already exists");
+                        validation.source = "Username";
+                        validation.keys.Add("Username  is already exist.");
+
+                    if (string.IsNullOrEmpty(userMaster.Firstname))
+                        validation.source = "FirstName";
+                        validation.keys.Add("FirstName can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(userMaster.Lastname))
+                        validation.source = "LastName";
+                        validation.keys.Add("LastName can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(userMaster.Email))
+                        validation.source = "Email";
+                        validation.keys.Add("Email can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(userMaster.PhoneNumber))
+                        validation.source = "PhoneNumber";
+                        validation.keys.Add("PhoneNumber can not be allow null or empty.");
+
+                    if (userMaster.PhoneNumber.Length < 10 || userMaster.PhoneNumber.Length > 10)
+                        validation.source = "PhoneNumber";
+                        validation.keys.Add("PhoneNumber maximum length valid 10 digit");
+
+                    if (userMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@Username", userMaster.Username, DbType.String);
@@ -53,6 +83,7 @@ namespace Medicorp.Services
                     response.ConstructErrorResponse("UserMasterService CreateAsync", ex.Message);
                 }
             }
+            response.validation = validation;
             return response;
         }
 
@@ -115,17 +146,50 @@ namespace Medicorp.Services
         public async Task<ApiResponse<int>> UpdateAsync(UserMaster userMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (userMaster.Id == "")
-                        throw new OperationExecutionException("User Id is not valid");
+                        validation.source = "Id";
+                        validation.keys.Add("Id can not be allow 0.");
+
                     if (string.IsNullOrEmpty(userMaster.Username))
-                        throw new OperationExecutionException("User name is not valid");
+                        validation.source = "Username";
+                        validation.keys.Add("Username can not be allow null or empty.");
+
                     bool validationResponse = await ValidateAsync(userMaster.Id, userMaster.Username);
                     if (!validationResponse)
-                        throw new OperationExecutionException("User name is already exists");
+                        validation.source = "Username";
+                        validation.keys.Add("Username can not be allow null or empty.");
+
+
+                    if (string.IsNullOrEmpty(userMaster.Firstname))
+                        validation.source = "FirstName";
+                        validation.keys.Add("FirstName can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(userMaster.Lastname))
+                        validation.source = "LastName";
+                        validation.keys.Add("LastName can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(userMaster.Email))
+                        validation.source = "Email";
+                        validation.keys.Add("Email can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(userMaster.PhoneNumber))
+                        validation.source = "PhoneNumber";
+                        validation.keys.Add("PhoneNumber can not be allow null or empty.");
+
+                    if (userMaster.PhoneNumber.Length < 10 || userMaster.PhoneNumber.Length > 10)
+                        validation.source = "PhoneNumber";
+                        validation.keys.Add("PhoneNumber maximum length valid 10 digit");
+
+                    if (userMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@Username", userMaster.Username, DbType.String);
@@ -149,6 +213,7 @@ namespace Medicorp.Services
                 }
 
             }
+            response.validation = validation;
             return response;
         }
 

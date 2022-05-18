@@ -24,15 +24,26 @@ namespace Medicorp.Services
         async Task<ApiResponse<int>> ICityMasterService.CreateAsync(CityMaster cityMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (string.IsNullOrEmpty(cityMaster.CityName))
-                        throw new OperationExecutionException("City Name is not valid");
+                        validation.source = "City Name";
+                        validation.keys.Add("City Name can not be allow null or empty.");
+                  
                     bool validationResponse = await ValidateNameAsync(cityMaster.CityName);
                     if (!validationResponse)
-                        throw new OperationExecutionException("City Name is already exists");
+                        validation.source = "City Name";
+                        validation.keys.Add("City Name is already exist.");
+
+                    if (cityMaster.StateId<=0)
+                        validation.source = "StateId";
+                        validation.keys.Add("StateId can not be allow 0."); 
+
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@CityName", cityMaster.CityName, DbType.String);
                     dbPara.Add("@StateId", cityMaster.StateId, DbType.Int32);
@@ -48,6 +59,7 @@ namespace Medicorp.Services
                     response.ConstructErrorResponse("CityMasterService CreateAsync", ex.Message);
                 }
             }
+            response.validation = validation;
             return response;
         }
         async Task<ApiResponse<List<CityMaster>>> ICityMasterService.GetCityAsync(CityMaster cityMaster)

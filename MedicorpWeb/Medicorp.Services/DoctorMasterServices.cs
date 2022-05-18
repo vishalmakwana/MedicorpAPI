@@ -24,15 +24,58 @@ namespace Medicorp.Services
         async Task<ApiResponse<int>> IDoctorMasterServices.CreateAsync(DoctorMaster doctorMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
+                    if (string.IsNullOrEmpty(doctorMaster.FirstName))
+                        validation.source = "FirstName";
+                        validation.keys.Add("FirstName can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.LastName))
+                        validation.source = "LastName";
+                        validation.keys.Add("LastName can not be allow null or empty.");
+
                     if (string.IsNullOrEmpty(doctorMaster.Email))
-                        throw new OperationExecutionException("Email is not valid");
+                        validation.source = "Email";
+                        validation.keys.Add("Email can not be allow null or empty.");
+
                     bool validationResponse = await ValidateNameAsync(doctorMaster.Email);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Email is already exists");
+                        validation.source = "Email";
+                        validation.keys.Add("Email Name is already exist.");
+
+                    if (doctorMaster.StateId <= 0)
+                        validation.source = "StateId";
+                        validation.keys.Add("StateId can not be allow 0.");
+
+                    if (doctorMaster.CityId <= 0)
+                        validation.source = "StateId";
+                        validation.keys.Add("CityId can not be allow 0.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.Address))
+                        validation.source = "Address";
+                        validation.keys.Add("Address can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.Mobilenumber))
+                        validation.source = "Mobilenumber";
+                        validation.keys.Add("Mobilenumber can not be allow null or empty.");
+
+                    if (doctorMaster.Mobilenumber.Length<10 || doctorMaster.Mobilenumber.Length>10)
+                        validation.source = "Mobilenumber";
+                        validation.keys.Add("Mobilenumber maximum length valid 10 digit");
+
+                    if (string.IsNullOrEmpty(doctorMaster.Gender))
+                        validation.source = "Gender";
+                        validation.keys.Add("Gender can not be allow null or empty.");
+
+                    if (doctorMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
+
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@FirstName", doctorMaster.FirstName, DbType.String);
                     dbPara.Add("@LastName", doctorMaster.LastName, DbType.String);
@@ -57,6 +100,7 @@ namespace Medicorp.Services
                     response.ConstructErrorResponse("DoctorMasterService CreateAsync", ex.Message);
                 }
             }
+            response.validation = validation;
             return response;
         }
 
@@ -118,19 +162,61 @@ namespace Medicorp.Services
         async Task<ApiResponse<int>> IDoctorMasterServices.UpdateAsync(DoctorMaster doctorMaster)
         {
             ApiResponse<int> response = new ApiResponse<int>() { Success = true };
+            Validation validation = new Validation();
+            validation.keys = new List<string>();
+
             using (TransactionScope transactionScope = new TransactionScope(TransactionScopeAsyncFlowOption.Enabled))
             {
                 try
                 {
                     if (doctorMaster.DoctorId == 0)
-                        throw new OperationExecutionException("Doctor Id is not valid");
+                        validation.source = "DoctorId";
+                        validation.keys.Add("DoctorId can not be allow 0.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.FirstName))
+                        validation.source = "FirstName";
+                        validation.keys.Add("FirstName can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.LastName))
+                        validation.source = "LastName";
+                        validation.keys.Add("LastName can not be allow null or empty.");
+
                     if (string.IsNullOrEmpty(doctorMaster.Email))
-                        throw new OperationExecutionException("Email Id is not valid");
+                        validation.source = "Email";
+                        validation.keys.Add("Email can not be allow null or empty.");
+
                     bool validationResponse = await ValidateAsync(doctorMaster.DoctorId, doctorMaster.Email);
                     if (!validationResponse)
-                        throw new OperationExecutionException("Email Id already exists");
-                    if (string.IsNullOrEmpty(doctorMaster.FirstName))
-                        throw new OperationExecutionException("Doctor name is not valid");
+                        validation.source = "Email";
+                        validation.keys.Add("Email Name is already exist.");
+
+                    if (doctorMaster.StateId <= 0)
+                        validation.source = "StateId";
+                        validation.keys.Add("StateId can not be allow 0.");
+
+                    if (doctorMaster.CityId <= 0)
+                        validation.source = "StateId";
+                        validation.keys.Add("CityId can not be allow 0.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.Address))
+                        validation.source = "Address";
+                        validation.keys.Add("Address can not be allow null or empty.");
+
+                    if (string.IsNullOrEmpty(doctorMaster.Mobilenumber))
+                        validation.source = "Mobilenumber";
+                        validation.keys.Add("Mobilenumber can not be allow null or empty.");
+
+                    if (doctorMaster.Mobilenumber.Length < 10 || doctorMaster.Mobilenumber.Length > 10)
+                        validation.source = "Mobilenumber";
+                        validation.keys.Add("Mobilenumber maximum length valid 10 digit");
+
+                    if (string.IsNullOrEmpty(doctorMaster.Gender))
+                        validation.source = "Gender";
+                        validation.keys.Add("Gender can not be allow null or empty.");
+
+                    if (doctorMaster.OrganizationId <= 0)
+                        validation.source = "OrganizationId Id";
+                        validation.keys.Add("OrganizationId can not be allow 0.");
 
                     DynamicParameters dbPara = new DynamicParameters();
                     dbPara.Add("@DoctorId", doctorMaster.DoctorId, DbType.Int32);
@@ -159,6 +245,7 @@ namespace Medicorp.Services
                 }
 
             }
+            response.validation = validation;
             return response;
         }
 
